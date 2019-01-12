@@ -4,20 +4,27 @@ using UnityEngine;
 
 public class TowerBaseEditor : MonoBehaviour
 {
-    public GameObject tower;
-    public bool isEmpty = true;
+    // towerRef can be any class inherited by the TowerLauncher (or the TowerLauncher itself)
+    public GameObject towerRef;
     public float radius;
+    public float reloadTime;
+
+    private GameObject towerClone;
+    private bool isEmpty = true;
 
     void OnMouseOver() {
         if(Input.GetMouseButtonDown(0) && isEmpty) {
-            GameObject towerObj = GameObject.Instantiate<GameObject>(tower);
-            towerObj.transform.position = new Vector3(
+            towerClone = GameObject.Instantiate<GameObject>(towerRef);
+            towerClone.transform.position = new Vector3(
                 this.transform.position.x,
-                towerObj.transform.localScale.y,
+                towerClone.transform.localScale.y,
                 this.transform.position.z);
-            TowerLauncher towerLauncher = towerObj.GetComponent<TowerLauncher>();
-            towerLauncher.radius = radius;
+            TowerLauncher towerLauncher = towerClone.GetComponent<TowerLauncher>();
+            towerLauncher.Initialize(radius, reloadTime);
             isEmpty = false;
+        } else if(Input.GetMouseButtonDown(1) && !isEmpty) {
+            Destroy(towerClone);
+            isEmpty = true;
         }
     }
 }

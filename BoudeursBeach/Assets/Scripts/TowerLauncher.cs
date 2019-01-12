@@ -8,6 +8,11 @@ public class TowerLauncher : MonoBehaviour
     public float reloadTime;
     private float timeBeforeReloaded;
 
+    public void Initialize(float radius, float reloadTime) {
+        this.radius = radius;
+        this.reloadTime = reloadTime;
+    }
+
     void Start() {
         timeBeforeReloaded = 0.0f;
     }
