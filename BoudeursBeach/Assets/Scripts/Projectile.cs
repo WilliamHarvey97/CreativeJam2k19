@@ -5,12 +5,19 @@ using UnityEngine;
 public class Projectile : MonoBehaviour
 {
     
-    public int damagePoints;
-    public Collider targetEnemy;
+    public float damagePoints;
+    public Enemy targetEnemy;
 
-    // Update is called once per frame
-    void Update()
+    public void Initialize(Enemy enemy, float damagePoints) {
+        this.targetEnemy = enemy;
+        this.damagePoints = damagePoints;
+    }
+    
+    void OnTriggerEnter(Collider other)
     {
-        
+        if(other.CompareTag("Enemy") || other.CompareTag("Ground")) {
+            targetEnemy.health -= damagePoints;
+            Destroy(gameObject);
+        }
     }
 }

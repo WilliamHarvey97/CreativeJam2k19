@@ -10,6 +10,7 @@ public class TowerLauncherBallistic : TowerLauncher
     public GameObject projectile;
     public float arcPeak;
     public float projectileInitialVelocity;
+    public float damagePoints;
 
     private float gravity = 9.81f;
     
@@ -26,7 +27,7 @@ public class TowerLauncherBallistic : TowerLauncher
 
             GameObject projObject = GameObject.Instantiate<GameObject>(projectile);
             Projectile proj = projObject.GetComponent<Projectile>();
-            proj.targetEnemy = enemy;
+            proj.Initialize(enemyComponent, damagePoints);
 
             BallisticMotion motion = projObject.GetComponent<BallisticMotion>();
             motion.Initialize(this.transform.position, gravity);
