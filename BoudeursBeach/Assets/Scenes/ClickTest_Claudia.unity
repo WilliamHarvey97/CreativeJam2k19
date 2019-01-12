@@ -360,7 +360,7 @@ PrefabInstance:
     - target: {fileID: 6121384842541412908, guid: 1091ade23ff2e46d2a043891d70fd844,
         type: 3}
       propertyPath: reloadTime
-      value: 1.5
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 6121384842541412908, guid: 1091ade23ff2e46d2a043891d70fd844,
         type: 3}
@@ -378,6 +378,11 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1108290651853559561, guid: d9b2c136295eb48878eec2e210733e9a,
         type: 3}
+    - target: {fileID: 6121384842541412908, guid: 1091ade23ff2e46d2a043891d70fd844,
+        type: 3}
+      propertyPath: damagePoints
+      value: 1.5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1091ade23ff2e46d2a043891d70fd844, type: 3}
 --- !u!1 &519472487 stripped
@@ -429,7 +434,7 @@ GameObject:
   - component: {fileID: 531357817}
   m_Layer: 0
   m_Name: Ground
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 8
