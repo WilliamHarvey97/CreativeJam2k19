@@ -1,4 +1,4 @@
-﻿using System.Collections;
+﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -16,6 +16,7 @@ public class TowerLauncher : MonoBehaviour
     {
         if(!isReloading()) {
             Collider[] enemiesInRadius = Physics.OverlapSphere(this.transform.position, radius);
+            enemiesInRadius = Array.FindAll(enemiesInRadius, enemy => enemy.CompareTag("Enemy"));
             if(enemiesInRadius.Length == 0) return;
 
             Collider closestEnemy = enemiesInRadius[0]; 
