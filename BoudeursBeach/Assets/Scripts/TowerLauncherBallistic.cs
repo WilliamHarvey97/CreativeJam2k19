@@ -19,9 +19,9 @@ public class TowerLauncherBallistic : TowerLauncher
         Vector3 fireVel, impactPos;
         Vector3 diff = enemy.transform.position - this.transform.position;
         Vector3 diffGround = new Vector3(diff.x, 0f, diff.z);
-        // Component enemyComponent = enemy.gameObject.GetComponent<Enemy>();
+        Enemy enemyComponent = enemy.gameObject.GetComponent<Enemy>();
 
-        if (fts.solve_ballistic_arc_lateral(this.transform.position, projectileInitialVelocity, enemy.transform.position, /* to be implemented : enemyComponent.velocity */ new Vector3(0f, 0f, 0f), arcPeak, out fireVel, out gravity, out impactPos)) {
+        if (fts.solve_ballistic_arc_lateral(this.transform.position, projectileInitialVelocity, enemy.transform.position, enemyComponent.velocity, arcPeak, out fireVel, out gravity, out impactPos)) {
             transform.forward = diffGround;
 
             GameObject projObject = GameObject.Instantiate<GameObject>(projectile);

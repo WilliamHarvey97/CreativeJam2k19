@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657868, g: 0.49641263, b: 0.57481706, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028355, g: 0.22571374, b: 0.30692255, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -195,7 +195,7 @@ GameObject:
   - component: {fileID: 1992195252}
   m_Layer: 0
   m_Name: Cube
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -435,7 +435,7 @@ PrefabInstance:
     - target: {fileID: 6121384842541412908, guid: 1091ade23ff2e46d2a043891d70fd844,
         type: 3}
       propertyPath: reloadTime
-      value: 1
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 6121384842541412908, guid: 1091ade23ff2e46d2a043891d70fd844,
         type: 3}
@@ -445,7 +445,7 @@ PrefabInstance:
     - target: {fileID: 6121384842541412908, guid: 1091ade23ff2e46d2a043891d70fd844,
         type: 3}
       propertyPath: projectileInitialVelocity
-      value: 1
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1091ade23ff2e46d2a043891d70fd844, type: 3}
