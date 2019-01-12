@@ -1283,7 +1283,7 @@ PrefabInstance:
     - target: {fileID: 8887252991739220764, guid: fd017366650ad47058f1b94e3f516c2a,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -26.6
+      value: -2.3
       objectReference: {fileID: 0}
     - target: {fileID: 8887252991739220764, guid: fd017366650ad47058f1b94e3f516c2a,
         type: 3}
@@ -1293,7 +1293,7 @@ PrefabInstance:
     - target: {fileID: 8887252991739220764, guid: fd017366650ad47058f1b94e3f516c2a,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -14.5
+      value: 24.9
       objectReference: {fileID: 0}
     - target: {fileID: 8887252991739220764, guid: fd017366650ad47058f1b94e3f516c2a,
         type: 3}
@@ -1344,7 +1344,7 @@ PrefabInstance:
     - target: {fileID: 2264562360306808218, guid: fd017366650ad47058f1b94e3f516c2a,
         type: 3}
       propertyPath: radius
-      value: 10
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 2264562360306808218, guid: fd017366650ad47058f1b94e3f516c2a,
         type: 3}
@@ -1355,12 +1355,35 @@ PrefabInstance:
     - target: {fileID: 2264562360306808218, guid: fd017366650ad47058f1b94e3f516c2a,
         type: 3}
       propertyPath: reloadTime
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2264562360306808218, guid: fd017366650ad47058f1b94e3f516c2a,
         type: 3}
       propertyPath: isEmpty
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2264562360306808218, guid: fd017366650ad47058f1b94e3f516c2a,
+        type: 3}
+      propertyPath: particuleSystem
+      value: 
+      objectReference: {fileID: 19861502, guid: 01f1e1f1177f76d499251acb5b14b63a,
+        type: 3}
+    - target: {fileID: 2264562360306808218, guid: fd017366650ad47058f1b94e3f516c2a,
+        type: 3}
+      propertyPath: particleObj
+      value: 
+      objectReference: {fileID: 9095975347800288464, guid: 42ecb36b74f4145c4acc4c0935eca65d,
+        type: 3}
+    - target: {fileID: 2264562360306808218, guid: fd017366650ad47058f1b94e3f516c2a,
+        type: 3}
+      propertyPath: particleAnimationDuration
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2264562360306808218, guid: fd017366650ad47058f1b94e3f516c2a,
+        type: 3}
+      propertyPath: particleRef
+      value: 
+      objectReference: {fileID: 9095975347800288464, guid: 42ecb36b74f4145c4acc4c0935eca65d,
+        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fd017366650ad47058f1b94e3f516c2a, type: 3}
