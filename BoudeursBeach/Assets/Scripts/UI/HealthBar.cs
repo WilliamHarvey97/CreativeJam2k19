@@ -8,6 +8,6 @@ public class HealthBar : MonoBehaviour
  
     void Update()
     {
-        this.transform.position = Camera.main.WorldToScreenPoint(followedObject.transform.position);
+        this.transform.position = Camera.main.WorldToScreenPoint(followedObject.transform.position +new Vector3(0,3,0));
     }
 }
