@@ -103,7 +103,7 @@ public class Enemy : MonoBehaviour{
     }
 
     void Die() {
-        Destroy(this);
+        Destroy(gameObject);
     }
 
     void DrawVelocityVector(){
