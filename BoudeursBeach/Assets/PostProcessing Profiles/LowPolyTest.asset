@@ -73,7 +73,7 @@ MonoBehaviour:
     m_Enabled: 0
     m_Settings:
       focusDistance: 5
-      aperture: 5.6
+      aperture: 2.7
       focalLength: 50
       useCameraFov: 0
       kernelSize: 1
@@ -139,9 +139,9 @@ MonoBehaviour:
           power: {r: 1, g: 1, b: 1, a: 0}
           offset: {r: 1, g: 1, b: 1, a: 0}
         linear:
-          lift: {r: 0.5007164, g: 0.45549482, b: 1, a: 0}
-          gamma: {r: 1, g: 0.9854121, b: 0.7627932, a: 0}
-          gain: {r: 0.6503236, g: 0.7599717, b: 1, a: 0}
+          lift: {r: 0.28818738, g: 0.41054952, b: 1, a: 0}
+          gamma: {r: 0.9197658, g: 0.71275914, b: 1, a: 0}
+          gain: {r: 1, g: 0.79538894, b: 0.40402448, a: 0}
       curves:
         master:
           curve:
