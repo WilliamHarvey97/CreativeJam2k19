@@ -5,7 +5,6 @@ using UnityEngine;
 public class TimerClock : MonoBehaviour
 {
     bool isTimerStarted = false;
-    public int timerInitialTime = 30;
     private int timer = 0;
 
     void FixedUpdate() {
@@ -15,8 +14,8 @@ public class TimerClock : MonoBehaviour
         }
     }
 
-    public void startTimer() {
-        this.timer = this.timerInitialTime;
+    public void startTimer(int timerInitialTime) {
+        this.timer = timerInitialTime;
         this.isTimerStarted = false;
     }
 

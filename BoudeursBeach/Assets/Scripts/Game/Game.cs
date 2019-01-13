@@ -10,6 +10,12 @@ public class Game : MonoBehaviour
     private int currentWaveIndex = 0;
     private int currentLevelIndex;
 
+    void Update() {
+        if(this.levels[this.currentLevelIndex].getIsLevelCleared()) {
+            Debug.Log("Level Done!");
+        }
+    }
+
     public int getCurrentWaveIndex() {
         return this.currentWaveIndex;
     }

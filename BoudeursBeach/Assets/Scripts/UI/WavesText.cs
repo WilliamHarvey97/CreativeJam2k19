@@ -8,6 +8,7 @@ public class WavesText : MonoBehaviour
     public GameObject game;
     
     void Update() {
-        this.GetComponent<Text>().text = this.game.GetComponent<Game>().getCurrentWaveIndex().ToString();
+        int currentWaveIndex = this.game.GetComponent<Game>().getCurrentWaveIndex();
+        this.GetComponent<Text>().text = (currentWaveIndex + 1).ToString();
     }
 }

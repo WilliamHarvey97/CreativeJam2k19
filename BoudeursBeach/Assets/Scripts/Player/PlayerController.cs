@@ -13,10 +13,7 @@ public class PlayerController : MonoBehaviour{
     Animator anim;
     string  currentAnimName ="";
 
-    void Start(){
-        money = 100;
-        score = 0;
-        health = 10; 
+    void Start() { 
         anim =GetComponent<Animator>();
         //anim.speed=2f;
     }
