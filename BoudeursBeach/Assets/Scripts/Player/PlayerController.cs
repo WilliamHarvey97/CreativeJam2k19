@@ -10,13 +10,18 @@ public class PlayerController : MonoBehaviour{
     Animator anim;
     string  currentAnimName ="";
 
+    GameObject sword;
+
     void Start(){
         anim =GetComponent<Animator>();
-        //anim.speed=2f;
+
+        sword =this.transform.Find("Bip01/Bip01 Pelvis/Bip01 Spine/Bip01 Spine1/Bip01 Neck/Bip01 L Clavicle/Bip01 L UpperArm/Bip01 L Forearm/Bip01 L Hand/Sword").gameObject;
     }
 
 
     void Update(){
+      
+        
         if(Input.GetKeyDown(KeyCode.Space)){
             this.Attack();
         }
@@ -65,7 +70,9 @@ public class PlayerController : MonoBehaviour{
 
 
     void Attack(){
-        //this.anim.SetTrigger("isAttacking");
+        if(sword.GetComponent<SwordCollision>().swordHasHitEnemy){
+            Destroy(sword.GetComponent<SwordCollision>().enemyHitBySword);
+        }
         
     }
 
@@ -92,6 +99,7 @@ public class PlayerController : MonoBehaviour{
             break;
         }
         }
+        Attack();
         
     }
     void Attack3(){
