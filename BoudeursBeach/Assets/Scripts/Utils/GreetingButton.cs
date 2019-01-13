@@ -14,6 +14,5 @@ public class GreetingButton : MonoBehaviour
     }
     void TaskOnClick(){
         SceneManager.LoadScene(this.playingSceneName, LoadSceneMode.Single);
-        Debug.Log("Allo");
     }
 }
