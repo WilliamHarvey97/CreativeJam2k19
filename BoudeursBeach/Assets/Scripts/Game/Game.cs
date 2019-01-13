@@ -36,9 +36,11 @@ public class Game : MonoBehaviour
     }
 
     private void startNextLevel() {
-        Debug.Log("Next Level!");
-        this.movePlayerAndCamera(this.levels[this.currentLevelIndex].playerSpawnPoint.transform.position);
-        this.levels[this.currentLevelIndex].startLevel();
+        Debug.Log("Next Level!" + this.currentLevelIndex);
+        if(this.currentLevelIndex <= this.levels.Length - 1) {
+            this.movePlayerAndCamera(this.levels[this.currentLevelIndex].playerSpawnPoint.transform.position);
+            this.levels[this.currentLevelIndex].startLevel();
+        } 
     }
 
     private bool isPlayerDead() {
