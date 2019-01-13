@@ -19,7 +19,6 @@ public class PlayerController : MonoBehaviour{
     bool isDashing;
     public float dashSpeed;
     private Vector3 dashOrientation;
-
     public GameObject dashParticles;
     private float dashTime;
     public float startDashTime;
@@ -29,10 +28,9 @@ public class PlayerController : MonoBehaviour{
         sword =this.transform.Find("Bip01/Bip01 Pelvis/Bip01 Spine/Bip01 Spine1/Bip01 Neck/Bip01 L Clavicle/Bip01 L UpperArm/Bip01 L Forearm/Bip01 L Hand/Sword").gameObject;
     }
 
-
     void Update(){
       
-        Debug.Log("VIE:"+this.health);
+        // Debug.Log("VIE:" + this.health);
         if(Input.GetKeyDown(KeyCode.Space)){
             
         }
@@ -45,20 +43,17 @@ public class PlayerController : MonoBehaviour{
         if(Input.GetKeyDown(KeyCode.LeftShift)){
             this.Dash();
         }
-
-        
-        
     }
 
     void FixedUpdate(){
         if(isDashing){
-            if(dashTime<=0){
+            if(dashTime<=0) {
                 isDashing=false;
                 dashTime =startDashTime;
                 this.GetComponent<Rigidbody>().velocity =new Vector3(0f,0f,0f);
                 this.GetComponent<CapsuleCollider>().isTrigger=false;
             }
-            else{
+            else {
                 Camera.main.GetComponent<CameraShake>().shakeAmount=0.3f;
                 Camera.main.GetComponent<CameraShake>().shakeDuration=0.1f;
                 anim.Play("attack_melee_11");
@@ -67,14 +62,12 @@ public class PlayerController : MonoBehaviour{
                 Instantiate(this.dashParticles,transform.position,Quaternion.identity);
                 transform.Translate(dashOrientation*dashSpeed, Space.World);
             }
-        }  
-
-
+        }
         this.Move();
         this.Turn();
     }
 
-    void Move(){
+    void Move() {
         float moveVertical =0;
         moveVertical   =Input.GetAxis("Vertical") * speed * Time.deltaTime;
         float moveHorizontal =Input.GetAxis("Horizontal") * speed * Time.deltaTime;
