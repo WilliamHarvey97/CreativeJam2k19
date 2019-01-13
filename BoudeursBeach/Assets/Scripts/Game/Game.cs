@@ -9,6 +9,7 @@ public class Game : MonoBehaviour
     public GameObject player;
     public int MaxEnemiesThatCanLeave = 5;
     public Camera camera;
+    public int money = 0;
     private int currentWaveIndex = 0;
     private int currentLevelIndex;
     private bool isGameOver = false;
@@ -62,5 +63,10 @@ public class Game : MonoBehaviour
     public void gameOver() {
         this.isGameOver = true;
         Debug.Log("Game Over!");
+    }
+    
+    // Can be a payment or a refund
+    public void addMoney(int dollars) {
+        this.money += dollars;
     }
 }

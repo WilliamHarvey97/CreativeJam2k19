@@ -6,6 +6,7 @@ public class TowerBaseEditor : MonoBehaviour
 {
     public GameObject towerRef;
     public GameObject particleRef;
+    public GameObject gameRef;
     public Material transparentMaterial;
     public Material opaqueMaterial;
     public float particleAnimationDuration;
@@ -20,10 +21,13 @@ public class TowerBaseEditor : MonoBehaviour
     private MeshRenderer towerRenderer;
     private Collider towerCollider;
     private Collider baseCollider;
+    private TowerLauncher towerLauncher;
+    private Game game;
 
     void Awake() {
         InitializeParticleEffects();
         InitiliazeTower();
+        this.game = this.gameRef.GetComponent<Game>();
     }
 
     void InitializeParticleEffects() {
@@ -40,7 +44,9 @@ public class TowerBaseEditor : MonoBehaviour
                 this.transform.position.x,
                 towerClone.transform.localScale.y,
                 this.transform.position.z);
-        this.towerClone.GetComponent<TowerLauncher>().Initialize(radius, reloadTime);
+        this.towerLauncher = this.towerClone.GetComponent<TowerLauncher>();
+        this.towerLauncher.Initialize(radius, reloadTime);
+
         this.towerClone.SetActive(false);
 
         this.towerCollider = this.towerClone.GetComponent<Collider>();
@@ -51,13 +57,15 @@ public class TowerBaseEditor : MonoBehaviour
     
     void Update() {
         if(isTouchingTowerBase() || isTouchingTower()){
-            if(Input.GetMouseButtonDown(0) && isEmpty) {
+            if(Input.GetMouseButtonDown(0) && isEmpty && hasEnoughMoney()) {
                 this.towerClone.SetActive(true);
                 this.towerRenderer.material = opaqueMaterial;
+                this.game.addMoney(-this.towerLauncher.price);
                 this.particleEffect.Play();
                 isEmpty = false;
             } else if(Input.GetMouseButtonDown(1) && !isEmpty) {
                 this.towerClone.SetActive(false);
+                this.game.addMoney(+this.towerLauncher.price);
                 isEmpty = true;
             } else if (isEmpty){
                 this.towerClone.SetActive(true);
@@ -89,5 +97,9 @@ public class TowerBaseEditor : MonoBehaviour
             this.particleEffect.Stop();
             particleTimeSinceCreation = 0f;
         }
+    }
+
+    bool hasEnoughMoney() {
+        return this.game.money >= this.towerClone.GetComponent<TowerLauncher>().price;
     }
 }

@@ -6,9 +6,9 @@ using UnityEngine.UI;
 public class MoneyText : MonoBehaviour
 {
     // Update is called once per frame
-    public GameObject player;
+    public GameObject game;
     
     void Update() {
-        this.GetComponent<Text>().text = this.player.GetComponent<PlayerController>().money.ToString();
+        this.GetComponent<Text>().text = this.game.GetComponent<Game>().money.ToString();
     }
 }

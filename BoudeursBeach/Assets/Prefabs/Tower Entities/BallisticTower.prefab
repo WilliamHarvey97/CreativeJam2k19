@@ -94,11 +94,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   radius: 5
   reloadTime: 3
+  price: 4
   projectile: {fileID: 1108290651853559561, guid: d9b2c136295eb48878eec2e210733e9a,
     type: 3}
   arcPeak: 15
   projectileInitialVelocity: 25
-  damagePoints: 0.5
+  damagePoints: 1
 --- !u!54 &519472489
 Rigidbody:
   m_ObjectHideFlags: 0
