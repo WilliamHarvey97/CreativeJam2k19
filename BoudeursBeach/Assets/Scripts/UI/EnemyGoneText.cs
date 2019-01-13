@@ -9,6 +9,6 @@ public class EnemyGoneText : MonoBehaviour
     public GameObject game;
     
     void Update() {
-        this.GetComponent<Text>().text = this.game.GetComponent<Game>().EnemiesGone.ToString();
+        this.GetComponent<Text>().text = this.game.GetComponent<Game>().EnemiesGone.ToString() + " / " + this.game.GetComponent<Game>().MaxEnemiesThatCanLeave.ToString();
     }
 }
