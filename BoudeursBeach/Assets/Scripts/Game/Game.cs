@@ -12,10 +12,13 @@ public class Game : MonoBehaviour
 
     void Update()
     {
-        int timeLeft = GameObject.FindWithTag("WaveTimer").gameObject.
+        GameObject waveGameObject = this.GameObject.FindWithTag("Wave").gameObject;
+        waveGameObject.FindChild
+        int timeLeft
         timeLeftText.text = "Time until Next Wave:" + Mathf.Round(timeLeft);
         if(timeLeft <= 0)
         {
+            
         }
     }
 }

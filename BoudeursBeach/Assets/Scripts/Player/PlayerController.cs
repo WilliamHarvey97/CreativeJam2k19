@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 public class PlayerController : MonoBehaviour{
     public int health;
@@ -9,11 +10,28 @@ public class PlayerController : MonoBehaviour{
     public int score;
     public int money;
 
-    // Start is called before the first frame update
+    Animator anim;
+    string  currentAnimName ="";
+
     void Start(){
         money = 100;
         score = 0;
         health = 10; 
+        anim =GetComponent<Animator>();
+        //anim.speed=2f;
+    }
+
+
+    void Update(){
+        if(Input.GetKeyDown(KeyCode.Space)){
+            this.Attack();
+        }
+        if(Input.GetKeyDown(KeyCode.Mouse0)){
+            this.Attack2();
+        }
+        if(Input.GetKeyDown(KeyCode.Mouse1)){
+            this.Attack3();
+        }
     }
 
     void FixedUpdate(){
@@ -22,9 +40,22 @@ public class PlayerController : MonoBehaviour{
     }
 
     void Move(){
-        float moveVertical   =Input.GetAxis("Vertical") * speed * Time.deltaTime;
-        float moveHorizontal =Input.GetAxis("Horizontal") * speed * Time.deltaTime; 
-        transform.Translate(moveHorizontal, 0f, moveVertical, Space.World);
+        float moveVertical =0;
+        moveVertical   =Input.GetAxis("Vertical") * speed * Time.deltaTime;
+        float moveHorizontal =Input.GetAxis("Horizontal") * speed * Time.deltaTime;
+
+        float currAnimVelocity =Mathf.Max(Mathf.Abs(Input.GetAxis("Vertical")), Mathf.Abs(Input.GetAxis("Horizontal")));
+        this.anim.SetFloat("Velocity",currAnimVelocity);
+
+        
+        // if(Input.GetAxis("Vertical") !=0 || Input.GetAxis("Horizontal") !=0){
+        //     this.anim.SetBool("isWalking",true);
+        // }
+        // if(Input.GetAxis("Vertical") ==0 && Input.GetAxis("Horizontal") ==0){
+        //     this.anim.SetBool("isWalking", false);
+        // }
+        
+       transform.Translate(moveHorizontal, 0f, moveVertical, Space.World);
     }
 
     void Turn(){
@@ -37,4 +68,41 @@ public class PlayerController : MonoBehaviour{
             transform.LookAt(mousePosition);
         }
     }
+
+
+    void Attack(){
+        //this.anim.SetTrigger("isAttacking");
+        
+    }
+
+    void Attack2(){
+        this.anim.SetTrigger("isAttacking2");
+        Random.seed = System.DateTime.Now.Millisecond;
+        float rand=Random.Range(0,3);
+        Debug.Log(rand);
+        if(!(this.anim.GetCurrentAnimatorStateInfo(0).IsName(currentAnimName))){
+        switch(rand){
+            case 0:
+                this.anim.Play("attack_melee_01");
+                this.currentAnimName="attack_melee_01";
+            break;
+
+            case 1:
+                this.anim.Play("attack_melee_11");
+                this.currentAnimName="attack_melee_11";
+            break;
+
+            case 2:
+                this.anim.Play("attack_melee_13");
+                this.currentAnimName="attack_melee_13";
+            break;
+        }
+        }
+        
+    }
+    void Attack3(){
+        this.anim.Play("long_attack_melee");
+        this.currentAnimName="long_attack_melee";
+    }
+
 }
