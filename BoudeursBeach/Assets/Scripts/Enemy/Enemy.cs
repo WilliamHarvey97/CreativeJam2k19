@@ -3,10 +3,14 @@ using System.Collections;
 using UnityEngine.AI;
 
 public class Enemy : MonoBehaviour{
-    public float health =10f;
+
+    PlayerController playerController;
+    public int moneyGain = 10;
+    public int scoreGain = 1;
+    public int health = 10;
     public float attackSpeed =7f; /* In seconds */
     public float attackRadius =5f;
-    public float damage =2f;
+    public int damage =2;
     public float speed =10f;
     public float aggroFactor =1.5f;
     public float aggroDistance =10f;
@@ -23,6 +27,7 @@ public class Enemy : MonoBehaviour{
     void Awake (){
         player =GameObject.FindGameObjectWithTag("Player");
         exit   =GameObject.FindGameObjectWithTag("Exit");
+        this.playerController = player.GetComponent<PlayerController>();
         nav = GetComponent <UnityEngine.AI.NavMeshAgent> ();
         nav.speed =speed;
 
@@ -84,7 +89,7 @@ public class Enemy : MonoBehaviour{
     void Attack() {
         this.isAttacking = true;
         if (this.isAttackReady() && isInRangeToAttack()) {
-            player.GetComponent<PlayerController>().health -= this.damage;
+           this.playerController.health -= this.damage;
         }
     }
 
@@ -104,6 +109,9 @@ public class Enemy : MonoBehaviour{
 
     void Die() {
         Destroy(this);
+        this.playerController.score +=  scoreGain;
+        this.playerController.money += moneyGain;
+        
     }
 
     void DrawVelocityVector(){
