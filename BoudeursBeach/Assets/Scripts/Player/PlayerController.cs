@@ -96,6 +96,7 @@ public class PlayerController : MonoBehaviour{
     }
     void Attack3(){
         this.anim.Play("long_attack_melee");
+        this.currentAnimName="long_attack_melee";
     }
 
 }
