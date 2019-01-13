@@ -34,8 +34,7 @@ public class Enemy : MonoBehaviour{
         if(this.health <= 0){
             this.Die();
         }
-
-        
+        else{
         if (this.isInRangeToAttack()) {
             this.Attack();
         }
@@ -44,9 +43,11 @@ public class Enemy : MonoBehaviour{
                 this.isAttackReady();
             }
         }
+        }
     } 
 
     void FixedUpdate(){
+        if(this.health > 0){
         Vector3 ownPosition     = this.transform.position;
         Vector3 playerPosition  = player.transform.position;
         Vector3 exitPosition    = exit.transform.position;
@@ -56,6 +57,7 @@ public class Enemy : MonoBehaviour{
         Vector3 finalPosition = this.transform.position;
         this.calculateVelocity(finalPosition);
         this.lastFramePosition =finalPosition;
+        }
     }
 
     void calculateVelocity(Vector3 finalPosition) {
@@ -81,8 +83,9 @@ public class Enemy : MonoBehaviour{
     
     void Attack() {
         this.isAttacking = true;
+        this.GetComponent<Animator>().SetTrigger("IsAttacking");
         if (this.isAttackReady() && isInRangeToAttack()) {
-            this.GetComponent<Animator>().SetTrigger("IsAttacking");
+            
             player.GetComponent<PlayerController>().health -= this.damage;
             player.GetComponent<Animator>().SetTrigger("isDamaged");
         }
@@ -103,16 +106,18 @@ public class Enemy : MonoBehaviour{
     }
 
     public void TakeDamage(float damage){
-        //Color curr_color =this.GetComponent<Material>().GetColor("Enemy");
-        //this.GetComponent<Material>().SetColor("Enemy",Color.blue);
-        //this.GetComponent<Renderer>().material.color = Color.blue;
+        if(health > 0){
         this.health -=damage;
         //this.transform.position -= this.transform.forward*2f;
         this.GetComponent<Animator>().Play("GetHit");
+        }
 
     }
-    void Die() {
-        Destroy(gameObject);
+    void Die() { 
+        this.GetComponent<Animator>().SetBool("isDead",true);
+        if((this.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("Destroy"))){
+            Destroy(gameObject);
+        }
     }
 
     void DrawVelocityVector(){

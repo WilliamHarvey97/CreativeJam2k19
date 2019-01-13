@@ -13,6 +13,14 @@ public class PlayerController : MonoBehaviour{
 
     GameObject sword;
 
+    bool isDashing;
+    public float dashSpeed;
+    private Vector3 dashOrientation;
+
+    public GameObject dashParticles;
+    private float dashTime;
+    public float startDashTime;
+
     void Start(){
         anim =GetComponent<Animator>();
 
@@ -32,9 +40,34 @@ public class PlayerController : MonoBehaviour{
         if(Input.GetKeyDown(KeyCode.Mouse1)){
             this.AttackAnim2();
         }
+        if(Input.GetKeyDown(KeyCode.LeftShift)){
+            this.Dash();
+        }
+
+        
+        
     }
 
     void FixedUpdate(){
+        if(isDashing){
+            if(dashTime<=0){
+                isDashing=false;
+                dashTime =startDashTime;
+                this.GetComponent<Rigidbody>().velocity =new Vector3(0f,0f,0f);
+                this.GetComponent<CapsuleCollider>().isTrigger=false;
+            }
+            else{
+                Camera.main.GetComponent<CameraShake>().shakeAmount=0.3f;
+                Camera.main.GetComponent<CameraShake>().shakeDuration=0.1f;
+                anim.Play("attack_melee_11");
+                this.GetComponent<CapsuleCollider>().isTrigger=true;
+                dashTime -= Time.deltaTime;
+                Instantiate(this.dashParticles,transform.position,Quaternion.identity);
+                transform.Translate(dashOrientation*dashSpeed, Space.World);
+            }
+        }  
+
+
         this.Move();
         this.Turn();
     }
@@ -46,14 +79,6 @@ public class PlayerController : MonoBehaviour{
 
         float currAnimVelocity =Mathf.Max(Mathf.Abs(Input.GetAxis("Vertical")), Mathf.Abs(Input.GetAxis("Horizontal")));
         this.anim.SetFloat("Velocity",currAnimVelocity);
-
-        
-        // if(Input.GetAxis("Vertical") !=0 || Input.GetAxis("Horizontal") !=0){
-        //     this.anim.SetBool("isWalking",true);
-        // }
-        // if(Input.GetAxis("Vertical") ==0 && Input.GetAxis("Horizontal") ==0){
-        //     this.anim.SetBool("isWalking", false);
-        // }
         
        transform.Translate(moveHorizontal, 0f, moveVertical, Space.World);
     }
@@ -71,7 +96,7 @@ public class PlayerController : MonoBehaviour{
 
 
     void Attack(float attackDamage){
-        sword.GetComponent<SwordCollision>().isAttacking =true;
+        //sword.GetComponent<SwordCollision>().isNormalAttacking =true;
         // if(sword.GetComponent<SwordCollision>().swordHasHitEnemy){
         //     GameObject enemy = sword.GetComponent<SwordCollision>().enemyHitBySword;
         //     if(enemy.CompareTag("Enemy") && enemy){  //Destroy other object
@@ -88,7 +113,8 @@ public class PlayerController : MonoBehaviour{
         Debug.Log(rand);
         if(!(this.anim.GetCurrentAnimatorStateInfo(0).IsName(currentAnimName))){
         sword.GetComponent<SwordCollision>().swordHasHitEnemy =false;
-        sword.GetComponent<SwordCollision>().isAttacking =false;
+        sword.GetComponent<SwordCollision>().isNormalAttacking =false;
+        sword.GetComponent<SwordCollision>().isHardAttacking =false;
         switch(rand){
             case 0:
                 this.anim.Play("attack_melee_01");
@@ -106,13 +132,57 @@ public class PlayerController : MonoBehaviour{
             // break;
         }
         }
+        //sword.GetComponent<SwordCollision>().isHardAttacking =false;
+        sword.GetComponent<SwordCollision>().isNormalAttacking =true;
         Attack(damage);
         
     }
     void AttackAnim2(){
+
         this.anim.Play("long_attack_melee");
         this.currentAnimName="long_attack_melee";
+        
+        //sword.GetComponent<SwordCollision>().isNormalAttacking =false;
+        sword.GetComponent<SwordCollision>().isHardAttacking =true;
         Attack(damage*2);
+    }
+
+    void Dash(){
+        this.dashTime =this.startDashTime;
+        this.dashOrientation=this.transform.forward;
+        isDashing=true;
+    }
+
+
+
+     void OnTriggerEnter(Collider other){
+         Debug.Log("YAY");
+         if(isDashing){
+            // Debug.Log("YAY");
+             if(other.CompareTag("Enemy")){
+                  
+             }
+         }
+     }
+
+
+    void OnParticleCollision(GameObject other){
+       
+        List<ParticleCollisionEvent> collisionEvents =new List<ParticleCollisionEvent>();
+        int numCollisions =this.dashParticles.GetComponent<ParticleSystem>().GetCollisionEvents(other, collisionEvents);
+        
+        Rigidbody rb =other.GetComponent<Rigidbody>();
+        if(rb){
+            Debug.Log("ASDAFS");
+        }
+
+        for(int i=0; i<numCollisions; i++){
+            
+        }
+        if(other.CompareTag("Enemy")){
+            
+            other.GetComponent<Enemy>().TakeDamage(100);
+        }
     }
 
 }
