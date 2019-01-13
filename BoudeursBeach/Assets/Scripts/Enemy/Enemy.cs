@@ -38,15 +38,11 @@ public class Enemy : MonoBehaviour{
     }
 
     void Update (){
-<<<<<<< HEAD
-        if(this.health <= 0){
-=======
         if(Vector3.Distance(exitPosition,this.transform.position) <= 5f) {
             this.Exit();
         }
        
         if(this.health <= 0) {
->>>>>>> 528c61dd10b3a09731441a914300fe790a158ea3
             this.Die();
         }
         else{
@@ -120,37 +116,31 @@ public class Enemy : MonoBehaviour{
         return false;
     }
 
-<<<<<<< HEAD
     public void TakeDamage(float damage){
         if(health > 0){
-        this.health -=damage;
-        //this.transform.position -= this.transform.forward*2f;
-        this.GetComponent<Animator>().Play("GetHit");
+            this.health -= (int)damage;
+            //this.transform.position -= this.transform.forward*2f;
+            this.GetComponent<Animator>().Play("GetHit");
         }
-
     }
     void Die() { 
         this.GetComponent<Animator>().SetBool("isDead",true);
         if((this.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("Destroy"))){
             Destroy(gameObject);
         }
-=======
-    void Die() {
-        Destroy(this.gameObject);
         this.playerController.score +=  scoreGain;
         this.playerController.money += moneyGain;
-        
     }
 
-    void Exit() {
-        Destroy(this.gameObject);
-        this.playerController.score -=  scoreGain;
-        this.playerController.money -= moneyGain;
-        GameObject.Find("Game").GetComponent<Game>().EnemiesGone++;
->>>>>>> 528c61dd10b3a09731441a914300fe790a158ea3
+        void Exit() {
+            Destroy(this.gameObject);
+            this.playerController.score -=  scoreGain;
+            this.playerController.money -= moneyGain;
+            GameObject.Find("Game").GetComponent<Game>().EnemiesGone++;
+        }
     }
 
-    void DrawVelocityVector(){
-        Debug.DrawRay(this.transform.position, this.velocity, Color.blue);
-    }
-}
+    // void DrawVelocityVector(){
+    //     Debug.DrawRay(this.transform.position, this.velocity, Color.blue);
+    // }
+

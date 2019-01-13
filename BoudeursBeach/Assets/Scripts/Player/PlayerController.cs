@@ -5,21 +5,15 @@ using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
 public class PlayerController : MonoBehaviour{
-<<<<<<< HEAD
     public float health =10f;
     public float damage =4f;
     public float speed =5f;
-=======
-    public int health;
-    public float speed = 5f;
     public int score;
     public int money;
->>>>>>> 528c61dd10b3a09731441a914300fe790a158ea3
 
     Animator anim;
     string  currentAnimName ="";
 
-<<<<<<< HEAD
     GameObject sword;
 
     bool isDashing;
@@ -31,11 +25,7 @@ public class PlayerController : MonoBehaviour{
     public float startDashTime;
 
     void Start(){
-=======
-    void Start() { 
->>>>>>> 528c61dd10b3a09731441a914300fe790a158ea3
         anim =GetComponent<Animator>();
-
         sword =this.transform.Find("Bip01/Bip01 Pelvis/Bip01 Spine/Bip01 Spine1/Bip01 Neck/Bip01 L Clavicle/Bip01 L UpperArm/Bip01 L Forearm/Bip01 L Hand/Sword").gameObject;
     }
 
