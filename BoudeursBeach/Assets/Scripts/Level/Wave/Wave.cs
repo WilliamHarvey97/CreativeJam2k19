@@ -7,8 +7,8 @@ public class Wave : MonoBehaviour
     public GameObject[] enemyGroups;
     public float[] timeSpanBetweenGroupSpawn;
     public Transform[] enemyGroupSpawningPoints;
-    public int currentSpawningEnemyGroupIndex;
-    public bool isEnded = false;
+    int currentSpawningEnemyGroupIndex;
+    bool isEnded = false;
     bool isReadyToSpawn = false;
 
     void Start() {
@@ -32,10 +32,15 @@ public class Wave : MonoBehaviour
         this.isEnded = true;
     }
 
+    public bool getIsEnded() {
+        return this.isEnded;
+    }
+
     private IEnumerator spawnGroup() {
         yield return new WaitForSeconds(this.timeSpanBetweenGroupSpawn[this.currentSpawningEnemyGroupIndex]);
         this.isReadyToSpawn = true;
         Instantiate (this.enemyGroups[this.currentSpawningEnemyGroupIndex], this.enemyGroupSpawningPoints[this.currentSpawningEnemyGroupIndex].position, this.enemyGroupSpawningPoints[this.currentSpawningEnemyGroupIndex].rotation);
         this.currentSpawningEnemyGroupIndex++;
+        Debug.Log("Spawning Enemies!");
     }
 }
