@@ -5,12 +5,8 @@ using UnityEngine;
 public class TimerClock : MonoBehaviour
 {
     bool isTimerStarted = false;
-    public int timerInitialTime = 60;
+    public int timerInitialTime = 30;
     private int timer = 0;
-
-    void Start() {
-        this.timer = this.timerInitialTime;
-    }
 
     void FixedUpdate() {
         if(!this.isTimerStarted && this.timer > 0) {
@@ -21,12 +17,14 @@ public class TimerClock : MonoBehaviour
 
     public void startTimer() {
         this.timer = this.timerInitialTime;
+        this.isTimerStarted = false;
     }
 
     IEnumerator decrementTimer() {
         yield return new WaitForSeconds(1);
-        this.isTimerStarted = false;
         this.timer--;
+        this.isTimerStarted = false;
+        Debug.Log(this.timer);
     }
 
     public int getTimer() {

@@ -4,21 +4,17 @@
 
 public class Game : MonoBehaviour
 {
-    public int wavesDones = 3;
+    public Level[] levels;
     public int EnemiesGone = 0;
     public int MaxEnemiesThatCanLeave = 5;
-     
-     public Text timeLeftText;
+    private int currentWaveIndex = 0;
+    private int currentLevelIndex;
 
-    void Update()
-    {
-        // GameObject waveGameObject = this.GameObject.FindWithTag("Wave").gameObject;
-        // waveGameObject.FindChild
-        // int timeLeft
-        // timeLeftText.text = "Time until Next Wave:" + Mathf.Round(timeLeft);
-        // if(timeLeft <= 0)
-        // {
-            
-        // }
+    public int getCurrentWaveIndex() {
+        return this.currentWaveIndex;
+    }
+
+    public int getTimeUntilNextWave() {
+        return this.levels[this.currentLevelIndex].timerBeforeWave.getTimer();
     }
 }

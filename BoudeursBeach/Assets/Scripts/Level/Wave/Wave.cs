@@ -8,8 +8,9 @@ public class Wave : MonoBehaviour
     public float[] timeSpanBetweenGroupSpawn;
     public Transform[] enemyGroupSpawningPoints;
     public int currentSpawningEnemyGroupIndex;
-    bool isReadyToSpawn = true;
-    float timer = 0;
+    public int timeBeforeNextWave; // Time to let some rest to the player before beginning of the countdown for the next wave
+    public bool isEnded = false;
+    bool isReadyToSpawn = false;
 
     void Start() {
         this.currentSpawningEnemyGroupIndex = 0;
@@ -19,7 +20,18 @@ public class Wave : MonoBehaviour
         if(this.currentSpawningEnemyGroupIndex < this.enemyGroups.Length && this.isReadyToSpawn) {
             this.isReadyToSpawn = false;
             StartCoroutine(this.spawnGroup());
+        } else if(!this.isEnded) {
+            this.waitForNextWave();
         }
+    }
+
+    public void setIsReadyToSpawn(bool val) {
+        this.isReadyToSpawn = val;
+    }
+
+    private IEnumerator waitForNextWave() {
+        yield return new WaitForSeconds(this.timeBeforeNextWave);
+        this.isEnded = true;
     }
 
     private IEnumerator spawnGroup() {

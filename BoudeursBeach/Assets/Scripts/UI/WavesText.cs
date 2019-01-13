@@ -5,10 +5,9 @@ using UnityEngine.UI;
 
 public class WavesText : MonoBehaviour
 {
-    // Update is called once per frame
     public GameObject game;
     
     void Update() {
-        this.GetComponent<Text>().text = this.game.GetComponent<Game>().wavesDones.ToString();
+        this.GetComponent<Text>().text = this.game.GetComponent<Game>().getCurrentWaveIndex().ToString();
     }
 }
