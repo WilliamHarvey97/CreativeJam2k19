@@ -32,7 +32,6 @@ public class PlayerController : MonoBehaviour{
 
     void Update(){
       
-        Debug.Log("VIE:"+this.health);
         if(Input.GetKeyDown(KeyCode.Space)){
             
         }
