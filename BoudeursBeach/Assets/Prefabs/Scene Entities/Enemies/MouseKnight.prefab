@@ -1472,7 +1472,11 @@ MonoBehaviour:
   damage: 2
   speed: 10
   aggroFactor: 1.5
+<<<<<<< HEAD
   aggroDistance: 25
+=======
+  aggroDistance: 16
+>>>>>>> d495adfbb41364a8cc7b87e1dcdcaaeaa7165c82
   velocity: {x: 0, y: 0, z: 0}
 --- !u!1 &1230985186
 GameObject:
