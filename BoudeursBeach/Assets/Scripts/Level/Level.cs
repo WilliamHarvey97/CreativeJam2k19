@@ -6,17 +6,30 @@ public class Level : MonoBehaviour
 {
     public Wave[] waves;
     public TimerClock timerBeforeWave;
+    public GameObject playerSpawnPoint;
     public int timeUntilNextWave = 5;
+    bool isLevelStarted = false;
     int currentWaveIndex;
     bool isReadyForNextWave = true;
     bool isLevelCleared = false;
 
     void Awake() {
         this.currentWaveIndex = 0;
-        this.timerBeforeWave.startTimer(this.timeUntilNextWave);
+        this.isLevelStarted = false;
     }
 
     void FixedUpdate() {
+        if(this.isLevelStarted) {
+            this.playLevel();
+        }
+    }
+
+    public void startLevel() {
+        this.isLevelStarted = true;
+        this.timerBeforeWave.startTimer(this.timeUntilNextWave);
+    }
+
+    private void playLevel() {
         if(timerBeforeWave.getTimer() <= 0) {
             if (this.currentWaveIndex < this.waves.Length) {
                 if(this.isReadyForNextWave) {
@@ -25,7 +38,10 @@ public class Level : MonoBehaviour
                 }
                 this.checkForNextWave();
             } else {
-                this.isLevelCleared = true;
+                if(GameObject.FindGameObjectsWithTag("Enemy").Length == 0) {
+                    this.isLevelCleared = true;
+                    this.isLevelStarted = false;
+                } 
             }
         }
     }
@@ -34,8 +50,12 @@ public class Level : MonoBehaviour
         return this.isLevelCleared;
     }
 
+    public void setIsLevelStarted(bool isLevelStarted) {
+        this.isLevelStarted = isLevelStarted;
+    }
+
     private void checkForNextWave() {
-        if (this.waves[this.currentWaveIndex].isEnded) {
+        if (this.waves[this.currentWaveIndex].getIsEnded()) {
             this.currentWaveIndex++;
             this.isReadyForNextWave = true;
             if(this.currentWaveIndex < this.waves.Length){
@@ -45,6 +65,7 @@ public class Level : MonoBehaviour
     }
 
     private void startNextWave() {
+        Debug.Log("Next wave is starting!");
         this.waves[this.currentWaveIndex].setIsReadyToSpawn(true); // Next wave can start!
     }
 }
