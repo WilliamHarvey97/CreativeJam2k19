@@ -1388,7 +1388,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1226271481}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 4.3, y: 0, z: 19.51}
   m_LocalScale: {x: 3.2260168, y: 3.2260168, z: 3.2260168}
   m_Children:
   - {fileID: 1748891371}
@@ -1472,7 +1472,11 @@ MonoBehaviour:
   damage: 2
   speed: 10
   aggroFactor: 1.5
-  aggroDistance: 12
+<<<<<<< HEAD
+  aggroDistance: 25
+=======
+  aggroDistance: 16
+>>>>>>> d495adfbb41364a8cc7b87e1dcdcaaeaa7165c82
   velocity: {x: 0, y: 0, z: 0}
 --- !u!1 &1230985186
 GameObject:
