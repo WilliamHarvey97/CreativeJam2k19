@@ -10,7 +10,7 @@ public class TowerLauncherBallistic : TowerLauncher
     public GameObject projectile;
     public float arcPeak;
     public float projectileInitialVelocity;
-    public float damagePoints;
+    public int damagePoints;
 
     private float gravity = 9.81f;
     
