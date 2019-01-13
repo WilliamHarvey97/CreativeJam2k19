@@ -3,10 +3,14 @@ using System.Collections;
 using UnityEngine.AI;
 
 public class Enemy : MonoBehaviour{
-    public float health =10f;
+
+    PlayerController playerController;
+    public int moneyGain = 10;
+    public int scoreGain = 1;
+    public int health = 10;
     public float attackSpeed =7f; /* In seconds */
     public float attackRadius =5f;
-    public float damage =2f;
+    public int damage =2;
     public float speed =10f;
     public float aggroFactor =1.5f;
     public float aggroDistance =10f;
@@ -19,19 +23,30 @@ public class Enemy : MonoBehaviour{
     NavMeshAgent nav;
     bool isAttacking = false;
     float timeLeftUntilAttack;
+    Vector3 exitPosition;
 
     void Awake (){
         player =GameObject.FindGameObjectWithTag("Player");
         exit   =GameObject.FindGameObjectWithTag("Exit");
+        this.playerController = player.GetComponent<PlayerController>();
         nav = GetComponent <UnityEngine.AI.NavMeshAgent> ();
         nav.speed =speed;
 
         timeLeftUntilAttack =attackSpeed;
         distanceWithPlayer =0f;
+        exitPosition = GameObject.FindGameObjectWithTag("Exit").transform.position;
     }
 
     void Update (){
+<<<<<<< HEAD
         if(this.health <= 0){
+=======
+        if(Vector3.Distance(exitPosition,this.transform.position) <= 5f) {
+            this.Exit();
+        }
+       
+        if(this.health <= 0) {
+>>>>>>> 528c61dd10b3a09731441a914300fe790a158ea3
             this.Die();
         }
         else{
@@ -105,6 +120,7 @@ public class Enemy : MonoBehaviour{
         return false;
     }
 
+<<<<<<< HEAD
     public void TakeDamage(float damage){
         if(health > 0){
         this.health -=damage;
@@ -118,6 +134,20 @@ public class Enemy : MonoBehaviour{
         if((this.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("Destroy"))){
             Destroy(gameObject);
         }
+=======
+    void Die() {
+        Destroy(this.gameObject);
+        this.playerController.score +=  scoreGain;
+        this.playerController.money += moneyGain;
+        
+    }
+
+    void Exit() {
+        Destroy(this.gameObject);
+        this.playerController.score -=  scoreGain;
+        this.playerController.money -= moneyGain;
+        GameObject.Find("Game").GetComponent<Game>().EnemiesGone++;
+>>>>>>> 528c61dd10b3a09731441a914300fe790a158ea3
     }
 
     void DrawVelocityVector(){
