@@ -1466,7 +1466,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moneyGain: 10
   scoreGain: 1
-  health: 10
+  health: 1
   attackSpeed: 1
   attackRadius: 6
   damage: 2

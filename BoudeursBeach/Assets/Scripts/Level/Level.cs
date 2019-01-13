@@ -38,7 +38,7 @@ public class Level : MonoBehaviour
                 }
                 this.checkForNextWave();
             } else {
-                if(GameObject.FindGameObjectsWithTag("Enemy").Length == 0) {
+                if(GameObject.FindGameObjectsWithTag("Enemy").Length -1 == 0) {
                     this.isLevelCleared = true;
                     this.isLevelStarted = false;
                 } 

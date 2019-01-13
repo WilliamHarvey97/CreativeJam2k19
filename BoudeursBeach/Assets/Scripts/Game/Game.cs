@@ -20,6 +20,7 @@ public class Game : MonoBehaviour
 
     void FixedUpdate() {
         if(this.currentLevelIndex < this.levels.Length && this.levels[this.currentLevelIndex].getIsLevelCleared()) {
+            this.currentLevelIndex++;
             this.startNextLevel();
         }
         if(this.isPlayerDead()) {
@@ -36,9 +37,6 @@ public class Game : MonoBehaviour
 
     private void startNextLevel() {
         Debug.Log("Next Level!");
-        if(this.currentLevelIndex != 0) {
-            this.currentLevelIndex++;
-        }
         this.movePlayerAndCamera(this.levels[this.currentLevelIndex].playerSpawnPoint.transform.position);
         this.levels[this.currentLevelIndex].startLevel();
     }
@@ -61,5 +59,6 @@ public class Game : MonoBehaviour
 
     public void gameOver() {
         this.isGameOver = true;
+        Debug.Log("Game Over!");
     }
 }

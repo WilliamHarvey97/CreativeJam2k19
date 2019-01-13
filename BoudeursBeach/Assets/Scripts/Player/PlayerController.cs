@@ -105,7 +105,6 @@ public class PlayerController : MonoBehaviour{
         this.anim.SetTrigger("isAttacking2");
         Random.seed = System.DateTime.Now.Millisecond;
         float rand=Random.Range(0,2);
-        Debug.Log(rand);
         if(!(this.anim.GetCurrentAnimatorStateInfo(0).IsName(currentAnimName))){
         sword.GetComponent<SwordCollision>().swordHasHitEnemy =false;
         sword.GetComponent<SwordCollision>().isNormalAttacking =false;
@@ -151,9 +150,7 @@ public class PlayerController : MonoBehaviour{
 
 
      void OnTriggerEnter(Collider other){
-         Debug.Log("YAY");
          if(isDashing){
-            // Debug.Log("YAY");
              if(other.CompareTag("Enemy")){
                   
              }
