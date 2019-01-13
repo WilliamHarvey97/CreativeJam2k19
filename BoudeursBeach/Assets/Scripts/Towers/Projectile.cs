@@ -5,10 +5,10 @@ using UnityEngine;
 public class Projectile : MonoBehaviour
 {
     
-    public float damagePoints;
+    public int damagePoints;
     public Enemy targetEnemy;
 
-    public void Initialize(Enemy enemy, float damagePoints) {
+    public void Initialize(Enemy enemy, int damagePoints) {
         this.targetEnemy = enemy;
         this.damagePoints = damagePoints;
     }
