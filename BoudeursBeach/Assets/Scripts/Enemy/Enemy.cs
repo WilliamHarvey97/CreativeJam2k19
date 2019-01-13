@@ -13,6 +13,7 @@ public class Enemy : MonoBehaviour{
     public int damage =2;
     public float speed =10f;
     public float aggroFactor =1.5f;
+    public GameObject game;
     public float aggroDistance =10f;
     public Vector3 velocity = new Vector3();
 
@@ -27,7 +28,7 @@ public class Enemy : MonoBehaviour{
 
     void Awake (){
         player =GameObject.FindGameObjectWithTag("Player");
-        exit   =GameObject.FindGameObjectWithTag("Exit");
+        exit   =GameObject.FindGameObjectWithTag("Exit"); // + this.game.GetComponent<Game>().getCurrentLevelIndex()
         this.playerController = player.GetComponent<PlayerController>();
         nav = GetComponent <UnityEngine.AI.NavMeshAgent> ();
         nav.speed =speed;
