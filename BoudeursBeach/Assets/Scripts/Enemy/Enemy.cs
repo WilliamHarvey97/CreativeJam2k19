@@ -31,7 +31,6 @@ public class Enemy : MonoBehaviour{
     }
 
     void Update (){
-       
         if(this.health <= 0){
             this.Die();
         }
@@ -45,8 +44,6 @@ public class Enemy : MonoBehaviour{
                 this.isAttackReady();
             }
         }
-        
-        
     } 
 
     void FixedUpdate(){
@@ -58,7 +55,6 @@ public class Enemy : MonoBehaviour{
 
         Vector3 finalPosition = this.transform.position;
         this.calculateVelocity(finalPosition);
-        this.DrawVelocityVector();
         this.lastFramePosition =finalPosition;
     }
 
@@ -68,6 +64,7 @@ public class Enemy : MonoBehaviour{
 
     void Move(Vector3 playerPosition, Vector3 exitPosition){
         if(!isAttacking){
+            this.GetComponent<Animator>().SetBool("IsIddle",false);
             if(this.distanceWithPlayer > aggroDistance){
                 nav.SetDestination(exitPosition);
                 nav.speed =speed;
@@ -77,6 +74,7 @@ public class Enemy : MonoBehaviour{
                 nav.speed =speed*aggroFactor;
             }
         } else {
+            this.GetComponent<Animator>().SetBool("IsIddle",true);
             nav.speed = 0f;
         }
     }
@@ -84,6 +82,7 @@ public class Enemy : MonoBehaviour{
     void Attack() {
         this.isAttacking = true;
         if (this.isAttackReady() && isInRangeToAttack()) {
+            this.GetComponent<Animator>().SetTrigger("IsAttacking");
             player.GetComponent<PlayerController>().health -= this.damage;
             player.GetComponent<Animator>().SetTrigger("isDamaged");
         }
@@ -103,6 +102,15 @@ public class Enemy : MonoBehaviour{
         return false;
     }
 
+    public void TakeDamage(float damage){
+        //Color curr_color =this.GetComponent<Material>().GetColor("Enemy");
+        //this.GetComponent<Material>().SetColor("Enemy",Color.blue);
+        //this.GetComponent<Renderer>().material.color = Color.blue;
+        this.health -=damage;
+        //this.transform.position -= this.transform.forward*2f;
+        this.GetComponent<Animator>().Play("GetHit");
+
+    }
     void Die() {
         Destroy(gameObject);
     }

@@ -5,6 +5,7 @@ using UnityEngine.EventSystems;
 
 public class PlayerController : MonoBehaviour{
     public float health =10f;
+    public float damage =4f;
     public float speed =5f;
 
     Animator anim;
@@ -21,15 +22,15 @@ public class PlayerController : MonoBehaviour{
 
     void Update(){
       
-        
+        Debug.Log("VIE:"+this.health);
         if(Input.GetKeyDown(KeyCode.Space)){
-            this.Attack();
+            
         }
         if(Input.GetKeyDown(KeyCode.Mouse0)){
-            this.Attack2();
+            this.AttackAnim1();
         }
         if(Input.GetKeyDown(KeyCode.Mouse1)){
-            this.Attack3();
+            this.AttackAnim2();
         }
     }
 
@@ -69,19 +70,25 @@ public class PlayerController : MonoBehaviour{
     }
 
 
-    void Attack(){
-        if(sword.GetComponent<SwordCollision>().swordHasHitEnemy){
-            Destroy(sword.GetComponent<SwordCollision>().enemyHitBySword);
-        }
+    void Attack(float attackDamage){
+        sword.GetComponent<SwordCollision>().isAttacking =true;
+        // if(sword.GetComponent<SwordCollision>().swordHasHitEnemy){
+        //     GameObject enemy = sword.GetComponent<SwordCollision>().enemyHitBySword;
+        //     if(enemy.CompareTag("Enemy") && enemy){  //Destroy other object
+        //         enemy.GetComponent<Enemy>().TakeDamage(attackDamage);
+        //     }
+        // }
         
     }
 
-    void Attack2(){
+    void AttackAnim1(){
         this.anim.SetTrigger("isAttacking2");
         Random.seed = System.DateTime.Now.Millisecond;
-        float rand=Random.Range(0,3);
+        float rand=Random.Range(0,2);
         Debug.Log(rand);
         if(!(this.anim.GetCurrentAnimatorStateInfo(0).IsName(currentAnimName))){
+        sword.GetComponent<SwordCollision>().swordHasHitEnemy =false;
+        sword.GetComponent<SwordCollision>().isAttacking =false;
         switch(rand){
             case 0:
                 this.anim.Play("attack_melee_01");
@@ -89,22 +96,23 @@ public class PlayerController : MonoBehaviour{
             break;
 
             case 1:
-                this.anim.Play("attack_melee_11");
-                this.currentAnimName="attack_melee_11";
-            break;
-
-            case 2:
                 this.anim.Play("attack_melee_13");
                 this.currentAnimName="attack_melee_13";
             break;
+
+            // case 2:
+            //     this.anim.Play("attack_melee_13");
+            //     this.currentAnimName="attack_melee_13";
+            // break;
         }
         }
-        Attack();
+        Attack(damage);
         
     }
-    void Attack3(){
+    void AttackAnim2(){
         this.anim.Play("long_attack_melee");
         this.currentAnimName="long_attack_melee";
+        Attack(damage*2);
     }
 
 }
