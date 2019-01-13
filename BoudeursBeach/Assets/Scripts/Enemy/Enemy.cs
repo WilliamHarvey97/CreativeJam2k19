@@ -85,6 +85,7 @@ public class Enemy : MonoBehaviour{
         this.isAttacking = true;
         if (this.isAttackReady() && isInRangeToAttack()) {
             player.GetComponent<PlayerController>().health -= this.damage;
+            player.GetComponent<Animator>().SetTrigger("isDamaged");
         }
     }
 
