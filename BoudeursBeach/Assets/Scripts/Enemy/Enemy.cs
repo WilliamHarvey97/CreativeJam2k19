@@ -23,6 +23,7 @@ public class Enemy : MonoBehaviour{
     NavMeshAgent nav;
     bool isAttacking = false;
     float timeLeftUntilAttack;
+    Vector3 exitPosition;
 
     void Awake (){
         player =GameObject.FindGameObjectWithTag("Player");
@@ -33,11 +34,15 @@ public class Enemy : MonoBehaviour{
 
         timeLeftUntilAttack =attackSpeed;
         distanceWithPlayer =0f;
+        exitPosition = GameObject.FindGameObjectWithTag("Exit").transform.position;
     }
 
     void Update (){
+        if(Vector3.Distance(exitPosition,this.transform.position) <= 5f) {
+            this.Exit();
+        }
        
-        if(this.health <= 0){
+        if(this.health <= 0) {
             this.Die();
         }
 
@@ -108,10 +113,17 @@ public class Enemy : MonoBehaviour{
     }
 
     void Die() {
-        Destroy(this);
+        Destroy(this.gameObject);
         this.playerController.score +=  scoreGain;
         this.playerController.money += moneyGain;
         
+    }
+
+    void Exit() {
+        Destroy(this.gameObject);
+        this.playerController.score -=  scoreGain;
+        this.playerController.money -= moneyGain;
+        GameObject.Find("Game").GetComponent<Game>().EnemiesGone++;
     }
 
     void DrawVelocityVector(){
