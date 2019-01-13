@@ -8,4 +8,7 @@ EditorBuildSettings:
   - enabled: 0
     path: 
     guid: 00000000000000000000000000000000
+  - enabled: 1
+    path: Assets/Scenes/GreetingScreen.unity
+    guid: a0b9cea9b4de5a04aad7bebd82b645bb
   m_configObjects: {}
