@@ -98,10 +98,11 @@ public class PlayerController : MonoBehaviour{
     }
 
     void Move(){
-        float moveVertical =0;
-        moveVertical   =Input.GetAxis("Vertical") * speed * Time.deltaTime;
+        float moveVertical   =Input.GetAxis("Vertical") * speed * Time.deltaTime;
         float moveHorizontal =Input.GetAxis("Horizontal") * speed * Time.deltaTime;
-
+        if(moveVertical ==0 && moveHorizontal ==0){
+            this.GetComponent<Rigidbody>().velocity =Vector3.zero;
+        }
         float currAnimVelocity =Mathf.Max(Mathf.Abs(Input.GetAxis("Vertical")), Mathf.Abs(Input.GetAxis("Horizontal")));
         this.anim.SetFloat("Velocity",currAnimVelocity);
         
