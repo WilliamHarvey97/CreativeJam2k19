@@ -12,6 +12,9 @@ EditorBuildSettings:
     path: Assets/Scenes/GreetingScreen.unity
     guid: a0b9cea9b4de5a04aad7bebd82b645bb
   - enabled: 1
-    path: Assets/Scenes/ClickTest.unity
-    guid: a4fe5f8615ee4fe4b8168a9731393496
+    path: Assets/Scenes/Levels/Level1.unity
+    guid: 568a51d87a2984420ac7c3f5d623f5af
+  - enabled: 1
+    path: Assets/Scenes/GameOver.unity
+    guid: 14d4434f5e88b1645a17eaee285b373d
   m_configObjects: {}

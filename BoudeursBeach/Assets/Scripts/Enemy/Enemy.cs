@@ -5,8 +5,6 @@ using UnityEngine.AI;
 public class Enemy : MonoBehaviour{
 
     PlayerController playerController;
-    public int moneyGain = 10;
-    public int scoreGain = 1;
     public int health = 10;
     public float attackSpeed =7f; /* In seconds */
     public float attackRadius =5f;
@@ -129,14 +127,12 @@ public class Enemy : MonoBehaviour{
         if((this.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("Destroy"))){
             Destroy(gameObject);
         }
-        this.playerController.score +=  scoreGain;
-        this.playerController.money += moneyGain;
+        this.GetComponent<NavMeshAgent>().enabled=false;
+        this.GetComponent<CapsuleCollider>().enabled=false;
     }
 
         void Exit() {
             Destroy(this.gameObject);
-            this.playerController.score -=  scoreGain;
-            this.playerController.money -= moneyGain;
             GameObject.Find("Game").GetComponent<Game>().EnemiesGone++;
         }
     }

@@ -54,6 +54,10 @@ public class Level : MonoBehaviour
         this.isLevelStarted = isLevelStarted;
     }
 
+    public int getCurrentWaveIndex() {
+        return this.currentWaveIndex;
+    }
+
     private void checkForNextWave() {
         if (this.waves[this.currentWaveIndex].getIsEnded()) {
             this.currentWaveIndex++;

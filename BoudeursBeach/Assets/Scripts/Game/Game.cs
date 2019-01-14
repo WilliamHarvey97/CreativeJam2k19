@@ -8,7 +8,6 @@ public class Game : MonoBehaviour
     public int EnemiesGone = 0;
     public GameObject player;
     public int MaxEnemiesThatCanLeave = 5;
-    public Camera camera;
     public int money = 0;
     private int currentWaveIndex = 0;
     private int currentLevelIndex;
@@ -27,13 +26,14 @@ public class Game : MonoBehaviour
         if(this.isPlayerDead()) {
             this.gameOver();
         }
+        this.currentWaveIndex = this.levels[this.currentLevelIndex].getCurrentWaveIndex();
     }
 
     void movePlayerAndCamera(Vector3 position) {
         Vector3 playerInitialPosition = this.player.transform.position;
         this.player.transform.position = position;
         Vector3 offset = position - playerInitialPosition;
-        this.camera.transform.position += offset;
+        Camera.main.transform.position += offset;
     }
 
     private void startNextLevel() {

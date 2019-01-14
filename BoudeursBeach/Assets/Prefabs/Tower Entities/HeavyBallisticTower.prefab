@@ -93,9 +93,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a8d62cb92b47c4c509e5d1ecb040748d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  radius: 8
+  radius: 80
   reloadTime: 6
-  price: 6
+  price: 60
   projectile: {fileID: 1108290651853559561, guid: d9b2c136295eb48878eec2e210733e9a,
     type: 3}
   arcPeak: 15

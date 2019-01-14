@@ -1464,15 +1464,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2821700a98c150c4da08e2c03cbf666d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moneyGain: 10
-  scoreGain: 1
-  health: 10
-  attackSpeed: 1
+  health: 6
+  attackSpeed: 1.2
   attackRadius: 6
   damage: 2
   speed: 10
   aggroFactor: 1.5
-  aggroDistance: 12
+  game: {fileID: 858984912696337399, guid: 2bc12a7a99330e64caf8f118451ead44, type: 3}
+  aggroDistance: 20
   velocity: {x: 0, y: 0, z: 0}
 --- !u!1 &1230985186
 GameObject:

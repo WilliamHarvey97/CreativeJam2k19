@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour{
     public float health =10f;
     public float damage =4f;
+    public GameObject game;
     public float speed =5f;
     public int score;
-    public int money;
 
     Animator anim;
     string  currentAnimName ="";
@@ -23,14 +24,25 @@ public class PlayerController : MonoBehaviour{
     public GameObject dashParticles;
     private float dashTime;
     public float startDashTime;
+    bool canDash = true;
+
+    bool scoreAdd =true;
 
     void Start(){
+        score =0;
         anim =GetComponent<Animator>();
         sword =this.transform.Find("Bip01/Bip01 Pelvis/Bip01 Spine/Bip01 Spine1/Bip01 Neck/Bip01 L Clavicle/Bip01 L UpperArm/Bip01 L Forearm/Bip01 L Hand/Sword").gameObject;
     }
 
 
     void Update(){
+      if(sword.GetComponent<SwordCollision>().swordHasHitEnemy && scoreAdd){
+        score +=5;
+        game.GetComponent<Game>().addMoney(2);
+        scoreAdd=false;
+        StartCoroutine(this.AddScore());
+        
+      }
       
         if(Input.GetKeyDown(KeyCode.Space)){
             
@@ -41,12 +53,24 @@ public class PlayerController : MonoBehaviour{
         if(Input.GetKeyDown(KeyCode.Mouse1)){
             this.AttackAnim2();
         }
-        if(Input.GetKeyDown(KeyCode.LeftShift)){
+        if(Input.GetKeyDown(KeyCode.LeftShift) && this.canDash){
             this.Dash();
+            StartCoroutine(this.dashCooldown());
+            this.canDash=false;
+        }
+        if(this.health <=0) {
+            SceneManager.LoadScene("GameOver", LoadSceneMode.Single);
         }
 
         
-        
+    }
+    IEnumerator AddScore(){
+        yield return new WaitForSeconds(1f);
+        this.scoreAdd =true;
+    }
+    IEnumerator dashCooldown(){
+        yield return new WaitForSeconds(0.5f);
+        this.canDash=true;
     }
 
     void FixedUpdate(){
@@ -61,7 +85,7 @@ public class PlayerController : MonoBehaviour{
                 Camera.main.GetComponent<CameraShake>().shakeAmount=0.3f;
                 Camera.main.GetComponent<CameraShake>().shakeDuration=0.1f;
                 anim.Play("attack_melee_11");
-                this.GetComponent<CapsuleCollider>().isTrigger=true;
+                //this.GetComponent<CapsuleCollider>().isTrigger=true;
                 dashTime -= Time.deltaTime;
                 Instantiate(this.dashParticles,transform.position,Quaternion.identity);
                 transform.Translate(dashOrientation*dashSpeed, Space.World);
